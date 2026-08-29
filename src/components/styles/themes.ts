@@ -101,6 +101,22 @@ const theme: Themes = {
       },
     },
   },
+  catppuccin: {
+    id: "T_007",
+    name: "catppuccin",
+    colors: {
+      body: "#1E1E2E",
+      scrollHandle: "#181825",
+      scrollHandleHover: "#11111B",
+      primary: "#CBA6F7",
+      secondary: "#FAB387",
+      text: {
+        100: "#CDD6F4",
+        200: "#BAC2DE",
+        300: "#45475A",
+      },
+    },
+  },
 };
 
 export default theme;

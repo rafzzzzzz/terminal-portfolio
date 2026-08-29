@@ -27,20 +27,22 @@ type Command = {
 }[];
 
 export const commands: Command = [
-  { cmd: "about", desc: "about Sat Naing", tab: 8 },
+  { cmd: "about", desc: "learn about Rafael Marques", tab: 8 },
   { cmd: "clear", desc: "clear the terminal", tab: 8 },
-  { cmd: "echo", desc: "print out anything", tab: 9 },
-  { cmd: "education", desc: "my education background", tab: 4 },
-  { cmd: "email", desc: "send an email to me", tab: 8 },
-  { cmd: "gui", desc: "go to my portfolio in GUI", tab: 10 },
-  { cmd: "help", desc: "check available commands", tab: 9 },
+  { cmd: "echo", desc: "print text to the terminal", tab: 9 },
+  { cmd: "education", desc: "view my educational background", tab: 4 },
+  { cmd: "email", desc: "send me an email", tab: 8 },
+  { cmd: "experience", desc: "view my professional experience", tab: 3 },
+  { cmd: "help", desc: "list available commands", tab: 9 },
   { cmd: "history", desc: "view command history", tab: 6 },
-  { cmd: "projects", desc: "view projects that I've coded", tab: 5 },
+  { cmd: "projects", desc: "view projects I've built", tab: 5 },
+  { cmd: "publication", desc: "view my scientific publication", tab: 2 },
   { cmd: "pwd", desc: "print current working directory", tab: 10 },
-  { cmd: "socials", desc: "check out my social accounts", tab: 6 },
-  { cmd: "themes", desc: "check available themes", tab: 7 },
-  { cmd: "welcome", desc: "display hero section", tab: 6 },
-  { cmd: "whoami", desc: "about current user", tab: 7 },
+  { cmd: "skills", desc: "view my technical skills", tab: 7 },
+  { cmd: "socials", desc: "view my social links", tab: 6 },
+  { cmd: "themes", desc: "list available themes", tab: 7 },
+  { cmd: "welcome", desc: "display the welcome section", tab: 6 },
+  { cmd: "whoami", desc: "display the current user", tab: 7 },
 ];
 
 type Term = {
@@ -194,7 +196,7 @@ const Terminal = () => {
           <MobileSpan>&#62;</MobileSpan>
         </label>
         <Input
-          title="terminal-input"
+          title="Terminal command input"
           type="text"
           id="terminal-input"
           autoComplete="off"

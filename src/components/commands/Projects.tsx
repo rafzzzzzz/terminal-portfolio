@@ -39,8 +39,8 @@ const Projects: React.FC = () => {
   ) : (
     <div data-testid="projects">
       <ProjectsIntro>
-        “Talk is cheap. Show me the code”? I got you. <br />
-        Here are some of my projects you shouldn't misss
+        Selected projects spanning IoT, infrastructure, and open-source desktop
+        tooling.
       </ProjectsIntro>
       {projects.map(({ id, title, desc }) => (
         <ProjectContainer key={id}>
@@ -56,27 +56,27 @@ const Projects: React.FC = () => {
 const projects = [
   {
     id: 1,
-    title: "Sat Naing's Blog",
-    desc: "My personal blog where I can write down my thoughts and experiences.",
-    url: "https://satnaing.dev/blog/",
+    title: "AirSense",
+    desc: "A low-cost ESP32 system for monitoring indoor air quality, featuring InfluxDB, Grafana, a custom PCB, and a 3D-printed enclosure.",
+    url: "https://github.com/rafzzzzzz/AirSense",
   },
   {
     id: 2,
-    title: "Haru Fashion",
-    desc: "An ecommerce web application where users can browse various products and make purchases.",
-    url: "https://haru-fashion.vercel.app/",
+    title: "Unraid Theme Studio",
+    desc: "A visual theme editor for the Unraid 7.2+ web interface, informed by hands-on home lab and self-hosting experience.",
+    url: "https://github.com/rafzzzzzz/unraid-theme-studio",
   },
   {
     id: 3,
-    title: "Haru API",
-    desc: "A RESTful API developed for the Haru fashion ecommerce project.",
-    url: "https://satnaing.github.io/haru-api/",
+    title: "Omareddit",
+    desc: "A native Reddit client for the Omarchy desktop shell.",
+    url: "https://github.com/rafzzzzzz/omareddit",
   },
   {
     id: 4,
-    title: "AstroPaper Blog Theme",
-    desc: "A minimal, accessible and SEO-friendly Astro blog theme.",
-    url: "https://astro-paper.pages.dev/",
+    title: "Network Cable Leaderboard",
+    desc: "A static leaderboard that turns classroom network cable assembly into a student competition.",
+    url: "https://github.com/rafzzzzzz/leaderboard_cabos",
   },
 ];
 

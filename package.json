@@ -52,9 +52,10 @@
     "vitest": "^0.31.1"
   },
   "lint-staged": {
-    "*": [
+    "*.{ts,tsx}": [
       "eslint",
       "prettier --write"
-    ]
+    ],
+    "*.{html,json,md,svg}": "prettier --write"
   }
 }

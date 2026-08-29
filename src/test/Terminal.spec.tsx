@@ -20,7 +20,7 @@ describe("Terminal Component", () => {
   beforeEach(() => {
     const termSetup = setup(<Terminal />);
     user = termSetup.user;
-    terminalInput = screen.getByTitle("terminal-input");
+    terminalInput = screen.getByTitle("Terminal command input");
   });
 
   describe("Input Features & Initial State", () => {
@@ -54,10 +54,10 @@ describe("Terminal Component", () => {
       );
     });
 
-    it("should return '/home/satnaing' when user type 'pwd' cmd", async () => {
+    it("should return '/home/rafael' when user type 'pwd' cmd", async () => {
       await user.type(terminalInput, "pwd{enter}");
       expect(screen.getByTestId("latest-output").firstChild?.textContent).toBe(
-        "/home/satnaing"
+        "/home/rafael"
       );
     });
 
@@ -119,9 +119,12 @@ describe("Terminal Component", () => {
     const otherCmds = [
       "about",
       "education",
+      "experience",
       "help",
       "history",
       "projects",
+      "publication",
+      "skills",
       "socials",
       "themes",
     ];
@@ -131,6 +134,13 @@ describe("Terminal Component", () => {
         expect(screen.getByTestId(`${cmd}`)).toBeInTheDocument();
       });
     });
+
+    it("should list the Catppuccin theme", async () => {
+      await user.type(terminalInput, "themes{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "catppuccin"
+      );
+    });
   });
 
   describe("Redirect commands", () => {
@@ -138,19 +148,11 @@ describe("Terminal Component", () => {
       window.open = vi.fn();
     });
 
-    it("should redirect to portfolio website when user type 'gui' cmd", async () => {
-      await user.type(terminalInput, "gui{enter}");
-      expect(window.open).toHaveBeenCalled();
-      expect(screen.getByTestId("latest-output").firstChild?.textContent).toBe(
-        ""
-      );
-    });
-
     it("should open mail app when user type 'email' cmd", async () => {
       await user.type(terminalInput, "email{enter}");
       expect(window.open).toHaveBeenCalled();
       expect(screen.getByTestId("latest-output").firstChild?.textContent).toBe(
-        "contact@satnaing.dev"
+        "rafael@marques.com"
       );
     });
 
@@ -162,7 +164,7 @@ describe("Terminal Component", () => {
       });
     });
 
-    nums.forEach(num => {
+    [1, 2].forEach(num => {
       it(`should redirect to social media when user type 'socials go ${num}' cmd`, async () => {
         await user.type(terminalInput, `socials go ${num}{enter}`);
         expect(window.open).toHaveBeenCalled();
@@ -203,7 +205,7 @@ describe("Terminal Component", () => {
 
         // firstly run commands correct options
         await user.type(terminalInput, `projects go 4{enter}`);
-        await user.type(terminalInput, `socials go 4{enter}`);
+        await user.type(terminalInput, `socials go 2{enter}`);
         await user.type(terminalInput, `themes set espresso{enter}`);
 
         // then run cmd with incorrect options
@@ -225,14 +227,14 @@ describe("Terminal Component", () => {
     });
 
     allCmds.forEach(cmd => {
-      it(`should autocomplete '${cmd}' when 'Ctrl + i' is pressed`, async () => {
+      it(`should autocomplete '${cmd}' when 'Ctrl + I' is pressed`, async () => {
         await user.type(terminalInput, cmd.slice(0, 2));
         await user.keyboard("{Control>}i{/Control}");
         expect(terminalInput.value).toBe(cmd);
       });
     });
 
-    it("should clear when 'Ctrl + l' is pressed", async () => {
+    it("should clear when 'Ctrl + L' is pressed", async () => {
       await user.type(terminalInput, "history{enter}");
       await user.keyboard("{Control>}l{/Control}");
       expect(screen.getByTestId("terminal-wrapper").children.length).toBe(1);

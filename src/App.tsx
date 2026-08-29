@@ -14,7 +14,7 @@ function App() {
   const [selectedTheme, setSelectedTheme] = useState(theme);
 
   // Disable browser's default behavior
-  // to prevent the page go up when Up Arrow is pressed
+  // to prevent the page from moving when an arrow key is pressed
   useEffect(() => {
     window.addEventListener(
       "keydown",
@@ -51,8 +51,8 @@ function App() {
 
   return (
     <>
-      <h1 className="sr-only" aria-label="Terminal Portfolio">
-        Terminal Portfolio
+      <h1 className="sr-only" aria-label="Rafael Marques Terminal Portfolio">
+        Rafael Marques Terminal Portfolio
       </h1>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>
