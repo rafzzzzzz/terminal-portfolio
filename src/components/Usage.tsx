@@ -2,7 +2,7 @@ import { UsageDiv } from "./styles/Output.styled";
 import { useLanguage } from "../i18n";
 
 type Props = {
-  cmd: "themes" | "projects" | "socials";
+  cmd: "themes" | "projects";
   marginY?: boolean;
 };
 
@@ -11,9 +11,8 @@ const Usage: React.FC<Props> = ({ cmd, marginY = false }) => {
   const placeholders = {
     themes: language === "pt" ? "nome-do-tema" : "theme-name",
     projects: language === "pt" ? "número-do-projeto" : "project-number",
-    socials: language === "pt" ? "número-da-ligação" : "link-number",
   };
-  const examples = { themes: "ubuntu", projects: "1", socials: "1" };
+  const examples = { themes: "ubuntu", projects: "1" };
   const action = cmd === "themes" ? "set" : "go";
   return (
     <UsageDiv data-testid={`${cmd}-invalid-arg`} marginY={marginY}>

@@ -43,7 +43,6 @@ export const commands: Command = [
   { cmd: "publication", tab: 2 },
   { cmd: "pwd", tab: 10 },
   { cmd: "skills", tab: 7 },
-  { cmd: "socials", tab: 6 },
   { cmd: "themes", tab: 7 },
   { cmd: "welcome", tab: 6 },
   { cmd: "whoami", tab: 7 },

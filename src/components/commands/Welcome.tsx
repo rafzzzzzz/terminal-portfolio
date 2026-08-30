@@ -55,7 +55,6 @@ const Welcome: React.FC = () => {
           </PreNameMobile>
         </PreWrapper>
         <Identity>Rafael Marques</Identity>
-        <div>{t.welcome.headline}</div>
         <div>{t.welcome.focus}</div>
         <div>{t.welcome.location}</div>
         <Separator>----</Separator>

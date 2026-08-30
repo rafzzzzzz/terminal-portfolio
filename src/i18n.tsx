@@ -11,7 +11,6 @@ export const translations = {
     set: "set",
     go: "go",
     welcome: {
-      headline: "IT Teacher Transitioning into Systems Administration",
       focus: "Linux | Networking | Docker | Self-hosting",
       location: "Trancoso, Guarda, Portugal",
       intro: "Choose a command below or type help to see every command.",
@@ -23,9 +22,9 @@ export const translations = {
       contact: "view contact details",
       echo: "print text to the terminal",
       education: "view my education",
-      email: "send me an email",
+      email: "show my email address",
       experience: "view my teaching experience",
-      github: "open my GitHub profile",
+      github: "show my GitHub profile link",
       help: "list available commands",
       history: "view command history",
       homelab: "view my personal home lab",
@@ -33,26 +32,30 @@ export const translations = {
       publication: "view my scientific publication",
       pwd: "print the current working directory",
       skills: "view my technical skills",
-      socials: "view my social links",
       themes: "list available themes",
       welcome: "display the welcome section",
       whoami: "display the current user",
     },
     about: [
       "Hi, my name is Rafael Marques.",
-      "I am an IT teacher and computer engineering graduate based in Trancoso, Guarda, Portugal.",
-      "I am moving towards systems administration through practical work with Linux, networking, Docker, self-hosting, and computer hardware.",
+      "I am a Computer Engineering graduate and IT teacher based in Trancoso, Guarda, Portugal.",
+      "I am interested in systems administration and looking for opportunities where I can apply and expand my experience with Linux, networking, Docker, self-hosting, and computer hardware.",
     ],
     skills: {
-      intro: "Skills grounded in teaching, education, and personal projects",
+      intro:
+        "Technical skills developed through education, work, and personal projects",
       items: [
         [
           "Systems",
-          "Linux and Windows subjects taught; Unraid used in my personal home lab",
+          "Experience with Linux, Windows, and macOS operating systems; Unraid used in my personal home lab",
+        ],
+        [
+          "AI-assisted workflows",
+          "Practical use of agent harnesses, reusable skills, context management, prompt iteration, code review, and test-driven verification",
         ],
         [
           "Networking",
-          "TCP/IP, DHCP, DNS, switches, routers, cabling, and troubleshooting taught in class",
+          "TCP/IP, DHCP, DNS, switches, routers, structured cabling, and network troubleshooting",
         ],
         [
           "Containers and storage",
@@ -64,11 +67,11 @@ export const translations = {
         ],
         [
           "Embedded systems",
-          "ESP32 and Arduino used in education and projects",
+          "ESP32 and Arduino development through hardware projects",
         ],
         [
-          "Programming and web",
-          "C++, Java, HTML, and CSS used in education and projects",
+          "Programming and automation",
+          "C++, Java, PowerShell, and shell scripting used in coursework and personal projects",
         ],
       ],
     },
@@ -78,12 +81,9 @@ export const translations = {
       employer: "Escola Profissional de Trancoso | 2024 - present",
       teachingTitle: "Classroom teaching",
       teaching:
-        "I teach computer networks, operating systems, computer architecture, digital systems, data communications, devices and peripherals, network protocols, transmission media, and microprocessor programming.",
-      practicalTitle: "Practical classroom work",
-      practical:
-        "I maintain lab PCs, install operating systems, configure switches and routers, troubleshoot classroom equipment, and prepare virtual machines for lessons.",
+        "I teach computer networks, operating systems, computer architecture, digital systems, data communications, devices and peripherals, network protocols, transmission media, and microprocessor programming. I also maintain lab PCs, install operating systems, configure switches and routers, troubleshoot equipment, and prepare virtual machines.",
       boundary:
-        "This is teaching and classroom lab work. I am transitioning into systems administration and do not claim production systems administration experience.",
+        "This is teaching and school lab experience, not production systems administration.",
     },
     homelab: {
       intro: "Personal Unraid home lab",
@@ -98,16 +98,17 @@ export const translations = {
     projects: {
       intro: "Two projects that reflect my systems and hardware interests.",
       airsense:
-        "My primary project. A low-cost ESP32 indoor air quality monitor with environmental sensors, a custom PCB, a 3D-printed enclosure, InfluxDB, and Grafana.",
+        "A low-cost ESP32 indoor air quality monitor with environmental sensors, a custom PCB, a 3D-printed enclosure, InfluxDB, and Grafana.",
       homelab:
         "My personal Unraid self-hosting environment on standard desktop hardware. Type homelab for the setup and routine work.",
     },
     contact: {
       intro: "Contact details",
       location: "Location",
-      workplace: "Workplace",
+      workplace: "Current workplace",
     },
-    socialIntro: "Social links",
+    githubPrompt: "Click the link below to view my GitHub profile.",
+    emailPrompt: "Click the email address below to send me an email.",
     education: {
       intro: "Education",
       degree: "BSc in Computer Engineering",
@@ -135,8 +136,6 @@ export const translations = {
     set: "definir",
     go: "abrir",
     welcome: {
-      headline:
-        "Professor de Informática em transição para Administração de Sistemas",
       focus: "Linux | Redes | Docker | Self-hosting",
       location: "Trancoso, Guarda, Portugal",
       intro:
@@ -149,9 +148,9 @@ export const translations = {
       contact: "ver os contactos",
       echo: "mostrar texto no terminal",
       education: "ver a minha formação",
-      email: "enviar-me uma mensagem de correio eletrónico",
+      email: "mostrar o meu endereço de correio eletrónico",
       experience: "ver a minha experiência de ensino",
-      github: "abrir o meu perfil no GitHub",
+      github: "mostrar a ligação para o meu perfil no GitHub",
       help: "listar os comandos disponíveis",
       history: "ver o histórico de comandos",
       homelab: "ver o meu laboratório doméstico",
@@ -159,27 +158,30 @@ export const translations = {
       publication: "ver a minha publicação científica",
       pwd: "mostrar a diretoria de trabalho atual",
       skills: "ver as minhas competências técnicas",
-      socials: "ver as minhas ligações sociais",
       themes: "listar os temas disponíveis",
       welcome: "mostrar a apresentação inicial",
       whoami: "mostrar o utilizador atual",
     },
     about: [
       "Olá, chamo-me Rafael Marques.",
-      "Sou professor de Informática e licenciado em Engenharia Informática. Vivo em Trancoso, no distrito da Guarda.",
-      "Estou a orientar o meu percurso para a administração de sistemas através de trabalho prático com Linux, redes, Docker, self-hosting e hardware informático.",
+      "Sou licenciado em Engenharia Informática e professor de Informática. Vivo em Trancoso, no distrito da Guarda.",
+      "Interesso-me pela administração de sistemas e procuro oportunidades onde possa aplicar e desenvolver a minha experiência com Linux, redes, Docker, self-hosting e hardware informático.",
     ],
     skills: {
       intro:
-        "Competências adquiridas no ensino, na formação e em projetos pessoais",
+        "Competências técnicas desenvolvidas na formação, no trabalho e em projetos pessoais",
       items: [
         [
           "Sistemas",
-          "Disciplinas de Linux e Windows lecionadas; Unraid utilizado no meu laboratório doméstico",
+          "Experiência com sistemas operativos Linux, Windows e macOS; Unraid utilizado no meu laboratório doméstico",
+        ],
+        [
+          "Fluxos de trabalho assistidos por IA",
+          "Utilização prática de agent harnesses, skills reutilizáveis, gestão de contexto, iteração de prompts, revisão de código e validação através de testes",
         ],
         [
           "Redes",
-          "TCP/IP, DHCP, DNS, switches, routers, cablagem e diagnóstico de avarias lecionados em aula",
+          "TCP/IP, DHCP, DNS, switches, routers, cablagem estruturada e diagnóstico de problemas de rede",
         ],
         [
           "Contentores e armazenamento",
@@ -191,11 +193,11 @@ export const translations = {
         ],
         [
           "Sistemas embebidos",
-          "ESP32 e Arduino utilizados na formação e em projetos",
+          "Desenvolvimento com ESP32 e Arduino em projetos de hardware",
         ],
         [
-          "Programação e web",
-          "C++, Java, HTML e CSS utilizados na formação e em projetos",
+          "Programação e automação",
+          "C++, Java, PowerShell e shell scripting utilizados na formação e em projetos pessoais",
         ],
       ],
     },
@@ -205,12 +207,9 @@ export const translations = {
       employer: "Escola Profissional de Trancoso | 2024 - presente",
       teachingTitle: "Ensino em sala de aula",
       teaching:
-        "Leciono redes de computadores, sistemas operativos, arquitetura de computadores, sistemas digitais, comunicação de dados, dispositivos e periféricos, protocolos de rede, meios de transmissão e programação de microprocessadores.",
-      practicalTitle: "Trabalho prático em sala de aula",
-      practical:
-        "Faço a manutenção dos computadores do laboratório, instalo sistemas operativos, configuro switches e routers, resolvo avarias em equipamentos utilizados nas aulas e preparo máquinas virtuais para as disciplinas.",
+        "Leciono redes de computadores, sistemas operativos, arquitetura de computadores, sistemas digitais, comunicação de dados, dispositivos e periféricos, protocolos de rede, meios de transmissão e programação de microprocessadores. Também faço a manutenção dos computadores do laboratório, instalo sistemas operativos, configuro switches e routers, resolvo problemas em equipamentos e preparo máquinas virtuais.",
       boundary:
-        "Esta experiência pertence ao ensino e ao trabalho no laboratório escolar. Estou em transição para a administração de sistemas e não afirmo ter experiência em administração de sistemas de produção.",
+        "Esta é experiência de ensino e de laboratório escolar, não de administração de sistemas de produção.",
     },
     homelab: {
       intro: "Laboratório doméstico pessoal com Unraid",
@@ -226,16 +225,18 @@ export const translations = {
       intro:
         "Dois projetos ligados aos meus interesses em sistemas e hardware.",
       airsense:
-        "O meu projeto principal. Um sistema económico de monitorização da qualidade do ar interior, baseado num ESP32, com sensores ambientais, placa de circuito impresso própria, caixa impressa em 3D, InfluxDB e Grafana.",
+        "Um sistema económico de monitorização da qualidade do ar interior, baseado num ESP32, com sensores ambientais, placa de circuito impresso própria, caixa impressa em 3D, InfluxDB e Grafana.",
       homelab:
         "O meu ambiente pessoal de self-hosting com Unraid em hardware comum de computador. Escreva homelab para ver a configuração e o trabalho habitual.",
     },
     contact: {
       intro: "Contactos",
       location: "Localização",
-      workplace: "Local de trabalho",
+      workplace: "Local de trabalho atual",
     },
-    socialIntro: "Ligações sociais",
+    githubPrompt: "Clique na ligação abaixo para ver o meu perfil no GitHub.",
+    emailPrompt:
+      "Clique no endereço abaixo para me enviar uma mensagem de correio eletrónico.",
     education: {
       intro: "Formação",
       degree: "Licenciatura em Engenharia Informática",

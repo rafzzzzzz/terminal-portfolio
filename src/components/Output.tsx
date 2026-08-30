@@ -14,7 +14,6 @@ import Homelab from "./commands/Homelab";
 import Projects from "./commands/Projects";
 import Publication from "./commands/Publication";
 import Skills from "./commands/Skills";
-import Socials from "./commands/Socials";
 import Themes from "./commands/Themes";
 import { OutputContainer, UsageDiv } from "./styles/Output.styled";
 import { termContext } from "./Terminal";
@@ -30,7 +29,7 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
   const { arg } = useContext(termContext);
   const { language, t } = useLanguage();
 
-  const specialCmds = ["projects", "socials", "themes", "echo"];
+  const specialCmds = ["projects", "themes", "echo"];
 
   // return 'Usage: <cmd>' if command arg is not valid
   // Example: about extra-argument
@@ -60,7 +59,6 @@ const Output: React.FC<Props> = ({ index, cmd }) => {
           publication: <Publication />,
           pwd: <GeneralOutput>/home/rafael</GeneralOutput>,
           skills: <Skills />,
-          socials: <Socials />,
           themes: <Themes />,
           welcome: <Welcome />,
           whoami: (

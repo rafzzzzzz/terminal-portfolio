@@ -17,10 +17,6 @@ const Experience: React.FC = () => {
         <div className="desc">{t.experience.teaching}</div>
       </EduList>
       <EduList>
-        <div className="title">{t.experience.practicalTitle}</div>
-        <div className="desc">{t.experience.practical}</div>
-      </EduList>
-      <EduList>
         <div className="desc">{t.experience.boundary}</div>
       </EduList>
     </Wrapper>

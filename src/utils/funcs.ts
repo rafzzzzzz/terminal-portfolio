@@ -49,7 +49,7 @@ export const checkRedirect = (
   command: string
 ): boolean =>
   rerender && // is submitted
-  currentCommand[0] === command && // current command starts with ('socials'|'projects')
+  currentCommand[0] === command && // current command starts with 'projects'
   currentCommand[1] === "go" && // first arg is 'go'
   currentCommand.length > 1 && // current command has arg
   currentCommand.length < 4 && // if num of arg is valid (not `projects go 1 sth`)
@@ -120,27 +120,19 @@ export const argTab = (
     return hintsCmds;
   }
 
-  // 5) if input is 'projects' or 'socials'
-  else if (inputVal === "projects " || inputVal === "socials ") {
+  // 5) if input is 'projects '
+  else if (inputVal === "projects ") {
     setInputVal(`${inputVal}go`);
     return [];
   }
 
-  // 6) if input is 'projects g' or 'socials g'
-  else if (inputVal === "projects g" || inputVal === "socials g") {
+  // 6) if input is 'projects g'
+  else if (inputVal === "projects g") {
     setInputVal(`${inputVal}o`);
     return [];
   }
 
-  // 7) if input is 'socials go '
-  else if (_.startsWith(inputVal, "socials go ")) {
-    ["1.GitHub", "2.Email"].forEach(t => {
-      hintsCmds = [...hintsCmds, t];
-    });
-    return hintsCmds;
-  }
-
-  // 8) if input is 'projects go '
+  // 7) if input is 'projects go '
   else if (_.startsWith(inputVal, "projects go ")) {
     ["1.AirSense", "2.Personal Unraid home lab"].forEach(t => {
       hintsCmds = [...hintsCmds, t];

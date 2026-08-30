@@ -132,7 +132,6 @@ describe("Terminal Component", () => {
       "projects",
       "publication",
       "skills",
-      "socials",
       "themes",
     ];
     otherCmds.forEach(cmd => {
@@ -150,13 +149,13 @@ describe("Terminal Component", () => {
     });
   });
 
-  describe("Redirect commands", () => {
-    it("should open mail app when user type 'email' cmd", async () => {
+  describe("Links and redirect commands", () => {
+    it("should show a clickable email address without opening it", async () => {
       await user.type(terminalInput, "email{enter}");
-      expect(window.open).toHaveBeenCalled();
-      expect(screen.getByTestId("latest-output").firstChild?.textContent).toBe(
-        "rafael@marques.com"
-      );
+      expect(window.open).not.toHaveBeenCalled();
+      expect(
+        screen.getByRole("link", { name: "rafael@marques.com" })
+      ).toHaveAttribute("href", "mailto:rafael@marques.com");
     });
 
     it("should open AirSense when user types 'projects go 1'", async () => {
@@ -167,24 +166,19 @@ describe("Terminal Component", () => {
       );
     });
 
-    it("should open the GitHub profile with the direct command", async () => {
+    it("should show the GitHub profile link without opening it", async () => {
       await user.type(terminalInput, "github{enter}");
-      expect(window.open).toHaveBeenCalledWith(
-        "https://github.com/rafzzzzzz",
-        "_blank"
-      );
-    });
-
-    [1, 2].forEach(num => {
-      it(`should redirect to social media when user type 'socials go ${num}' cmd`, async () => {
-        await user.type(terminalInput, `socials go ${num}{enter}`);
-        expect(window.open).toHaveBeenCalled();
-      });
+      expect(window.open).not.toHaveBeenCalled();
+      expect(
+        screen.getByRole("link", {
+          name: "https://github.com/rafzzzzzz",
+        })
+      ).toHaveAttribute("href", "https://github.com/rafzzzzzz");
     });
   });
 
   describe("Invalid Arguments", () => {
-    const specialUsageCmds = ["themes", "socials", "projects"];
+    const specialUsageCmds = ["themes", "projects"];
     const usageCmds = allCmds.filter(
       cmd => !["echo", ...specialUsageCmds].includes(cmd)
     );
@@ -216,12 +210,11 @@ describe("Terminal Component", () => {
 
         // firstly run commands correct options
         await user.type(terminalInput, `projects go 1{enter}`);
-        await user.type(terminalInput, `socials go 2{enter}`);
         await user.type(terminalInput, `themes set espresso{enter}`);
 
         // then run cmd with incorrect options
         await user.type(terminalInput, `${cmd} ${arg}{enter}`);
-        expect(window.open).toBeCalledTimes(2);
+        expect(window.open).toBeCalledTimes(1);
 
         // TODO: Test theme change
       });
@@ -273,7 +266,7 @@ describe("Terminal Component", () => {
       const welcome = screen.getByTestId("welcome");
 
       expect(welcome).toHaveTextContent("Rafael Marques");
-      expect(welcome).toHaveTextContent(
+      expect(welcome).not.toHaveTextContent(
         "IT Teacher Transitioning into Systems Administration"
       );
       expect(welcome).toHaveTextContent(
@@ -286,7 +279,7 @@ describe("Terminal Component", () => {
       await user.click(screen.getByRole("button", { name: "PT" }));
 
       expect(screen.getByTestId("welcome")).toHaveTextContent(
-        "Professor de Informática em transição para Administração de Sistemas"
+        "Linux | Redes | Docker | Self-hosting"
       );
       expect(screen.getByTitle("Introdução de comandos no terminal")).toBe(
         terminalInput
@@ -344,6 +337,53 @@ describe("Terminal Component", () => {
       expect(screen.getByTestId("latest-output")).toHaveTextContent(
         "Escola Profissional de Trancoso"
       );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Current workplace"
+      );
+    });
+
+    it("shows revised about, skills, and experience content", async () => {
+      await user.type(terminalInput, "about{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Computer Engineering graduate and IT teacher"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "looking for opportunities"
+      );
+
+      await user.type(terminalInput, "skills{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "AI-assisted workflows"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "agent harnesses"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Linux, Windows, and macOS"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Programming and automation"
+      );
+      expect(screen.getByTestId("latest-output")).not.toHaveTextContent(
+        "taught in class"
+      );
+
+      await user.type(terminalInput, "experience{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "maintain lab PCs"
+      );
+      expect(screen.getByTestId("latest-output")).not.toHaveTextContent(
+        "Practical classroom work"
+      );
+    });
+
+    it("does not expose the removed socials command", async () => {
+      expect(allCmds).not.toContain("socials");
+
+      await user.type(terminalInput, "socials{enter}");
+      expect(screen.getByTestId("not-found-0")).toHaveTextContent(
+        "command not found: socials"
+      );
     });
 
     it("lists only AirSense and the personal Unraid home lab as projects", async () => {
@@ -352,6 +392,7 @@ describe("Terminal Component", () => {
 
       expect(output).toHaveTextContent("AirSense");
       expect(output).toHaveTextContent("Personal Unraid home lab");
+      expect(output).not.toHaveTextContent("My primary project");
       expect(output).not.toHaveTextContent("Omareddit");
       expect(output).not.toHaveTextContent("Unraid Theme Studio");
       expect(output).not.toHaveTextContent("Network Cable Leaderboard");
