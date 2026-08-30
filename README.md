@@ -15,7 +15,8 @@ The deployed site is available at
 - Clickable commands for visitors who do not use terminals
 - Autocomplete with `Tab` or `Ctrl+I`
 - Command history and keyboard navigation
-- Seven color themes, including Catppuccin Mocha
+- Eight themes based on Rafael's Omarchy palettes: Catppuccin, Everforest,
+  Osaka Jade, Gruvbox, Lumen, Tokyo Night, Nord, and Ristretto
 - PWA and offline support
 - Vitest test suite
 

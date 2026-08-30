@@ -12,7 +12,7 @@ declare module "styled-components" {
       scrollHandleHover: string;
       primary: string;
       secondary: string;
-      accents?: {
+      accents: {
         heading: string;
         command: string;
         link: string;

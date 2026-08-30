@@ -210,7 +210,7 @@ describe("Terminal Component", () => {
 
         // firstly run commands correct options
         await user.type(terminalInput, `projects go 1{enter}`);
-        await user.type(terminalInput, `themes set espresso{enter}`);
+        await user.type(terminalInput, `themes set catppuccin{enter}`);
 
         // then run cmd with incorrect options
         await user.type(terminalInput, `${cmd} ${arg}{enter}`);

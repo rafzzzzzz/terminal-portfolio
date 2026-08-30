@@ -18,7 +18,7 @@ export const generateTabs = (num = 0): string => {
  * Check arg is valid
  * @param {string[]} arg - The arg array
  * @param {string} action - The action to compare | "go" | "set"
- * @param {string[]} options - Option array to compare | "dark" | "1"
+ * @param {string[]} options - Option array to compare | "catppuccin" | "1"
  * @returns {boolean} boolean
  */
 export const isArgInvalid = (
@@ -71,7 +71,7 @@ export const checkThemeSwitch = (
   currentCommand[0] === "themes" && // current command starts with 'themes'
   currentCommand[1] === "set" && // first arg is 'set'
   currentCommand.length > 1 && // current command has arg
-  currentCommand.length < 4 && // if num of arg is valid (not `themes set light sth`)
+  currentCommand.length < 4 && // if num of arg is valid (not `themes set nord sth`)
   _.includes(themes, currentCommand[2]); // arg last part is one of id
 
 /**

@@ -17,8 +17,8 @@ export default defineConfig({
         "short_name": "Rafael Marques",
         description:
           "Bilingual terminal portfolio for Rafael Marques, an IT teacher transitioning into systems administration.",
-        "theme_color": "#1d2a35",
-        "background_color": "#1d2a35",
+        "theme_color": "#1e1e2e",
+        "background_color": "#1e1e2e",
         display: "standalone",
         icons: [
           {

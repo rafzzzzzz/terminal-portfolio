@@ -12,7 +12,7 @@ const Usage: React.FC<Props> = ({ cmd, marginY = false }) => {
     themes: language === "pt" ? "nome-do-tema" : "theme-name",
     projects: language === "pt" ? "número-do-projeto" : "project-number",
   };
-  const examples = { themes: "ubuntu", projects: "1" };
+  const examples = { themes: "catppuccin", projects: "1" };
   const action = cmd === "themes" ? "set" : "go";
   return (
     <UsageDiv data-testid={`${cmd}-invalid-arg`} marginY={marginY}>
