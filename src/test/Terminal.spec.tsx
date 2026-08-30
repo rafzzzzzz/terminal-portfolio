@@ -16,10 +16,14 @@ const allCmds = commands.map(cmdObj => cmdObj.cmd);
 describe("Terminal Component", () => {
   let terminalInput: HTMLInputElement;
   let user: UserEvent;
+  let unmount: () => void;
 
   beforeEach(() => {
+    window.localStorage.clear();
+    window.open = vi.fn();
     const termSetup = setup(<Terminal />);
     user = termSetup.user;
+    unmount = termSetup.unmount;
     terminalInput = screen.getByTitle("Terminal command input");
   });
 
@@ -80,7 +84,7 @@ describe("Terminal Component", () => {
 
     it("should clear everything when user type 'clear' cmd", async () => {
       await user.type(terminalInput, "clear{enter}");
-      expect(screen.getByTestId("terminal-wrapper").children.length).toBe(1);
+      expect(screen.queryAllByTestId("input-command")).toHaveLength(0);
     });
 
     it("should return `hello world` when user type `echo hello world` cmd", async () => {
@@ -120,8 +124,11 @@ describe("Terminal Component", () => {
       "about",
       "education",
       "experience",
+      "contact",
+      "github",
       "help",
       "history",
+      "homelab",
       "projects",
       "publication",
       "skills",
@@ -144,10 +151,6 @@ describe("Terminal Component", () => {
   });
 
   describe("Redirect commands", () => {
-    beforeEach(() => {
-      window.open = vi.fn();
-    });
-
     it("should open mail app when user type 'email' cmd", async () => {
       await user.type(terminalInput, "email{enter}");
       expect(window.open).toHaveBeenCalled();
@@ -156,12 +159,20 @@ describe("Terminal Component", () => {
       );
     });
 
-    const nums = [1, 2, 3, 4];
-    nums.forEach(num => {
-      it(`should redirect to project URL when user type 'projects go ${num}' cmd`, async () => {
-        await user.type(terminalInput, `projects go ${num}{enter}`);
-        expect(window.open).toHaveBeenCalled();
-      });
+    it("should open AirSense when user types 'projects go 1'", async () => {
+      await user.type(terminalInput, "projects go 1{enter}");
+      expect(window.open).toHaveBeenCalledWith(
+        "https://github.com/rafzzzzzz/AirSense",
+        "_blank"
+      );
+    });
+
+    it("should open the GitHub profile with the direct command", async () => {
+      await user.type(terminalInput, "github{enter}");
+      expect(window.open).toHaveBeenCalledWith(
+        "https://github.com/rafzzzzzz",
+        "_blank"
+      );
     });
 
     [1, 2].forEach(num => {
@@ -204,7 +215,7 @@ describe("Terminal Component", () => {
         window.open = vi.fn();
 
         // firstly run commands correct options
-        await user.type(terminalInput, `projects go 4{enter}`);
+        await user.type(terminalInput, `projects go 1{enter}`);
         await user.type(terminalInput, `socials go 2{enter}`);
         await user.type(terminalInput, `themes set espresso{enter}`);
 
@@ -237,7 +248,7 @@ describe("Terminal Component", () => {
     it("should clear when 'Ctrl + L' is pressed", async () => {
       await user.type(terminalInput, "history{enter}");
       await user.keyboard("{Control>}l{/Control}");
-      expect(screen.getByTestId("terminal-wrapper").children.length).toBe(1);
+      expect(screen.queryAllByTestId("input-command")).toHaveLength(0);
     });
 
     it("should go to previous back and forth when 'Up & Down Arrow' is pressed", async () => {
@@ -254,6 +265,96 @@ describe("Terminal Component", () => {
       expect(terminalInput.value).toBe("pwd");
       await user.keyboard("{arrowdown}");
       expect(terminalInput.value).toBe("");
+    });
+  });
+
+  describe("Portfolio content and language", () => {
+    it("shows the core positioning before a visitor enters a command", () => {
+      const welcome = screen.getByTestId("welcome");
+
+      expect(welcome).toHaveTextContent("Rafael Marques");
+      expect(welcome).toHaveTextContent(
+        "IT Teacher Transitioning into Systems Administration"
+      );
+      expect(welcome).toHaveTextContent(
+        "Linux | Networking | Docker | Self-hosting"
+      );
+      expect(welcome).toHaveTextContent("Trancoso, Guarda, Portugal");
+    });
+
+    it("switches all portfolio guidance to European Portuguese", async () => {
+      await user.click(screen.getByRole("button", { name: "PT" }));
+
+      expect(screen.getByTestId("welcome")).toHaveTextContent(
+        "Professor de Informática em transição para Administração de Sistemas"
+      );
+      expect(screen.getByTitle("Introdução de comandos no terminal")).toBe(
+        terminalInput
+      );
+
+      await user.type(terminalInput, "help{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "ver a minha experiência de ensino"
+      );
+    });
+
+    it("persists the selected language", async () => {
+      await user.click(screen.getByRole("button", { name: "PT" }));
+      expect(window.localStorage.getItem("portfolio-language")).toBe("pt");
+
+      unmount();
+      setup(<Terminal />);
+
+      expect(screen.getByRole("button", { name: "PT" })).toHaveAttribute(
+        "aria-pressed",
+        "true"
+      );
+      expect(screen.getByTestId("welcome")).toHaveTextContent(
+        "Escolha um comando"
+      );
+    });
+
+    it("executes a clickable suggestion and adds it to history", async () => {
+      await user.click(screen.getByRole("button", { name: "about" }));
+
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Rafael Marques"
+      );
+      expect(screen.getAllByTestId("input-command")[0]).toHaveTextContent(
+        "about"
+      );
+
+      await user.type(terminalInput, "history{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent("about");
+    });
+
+    it("shows honest home lab and contact details", async () => {
+      await user.type(terminalInput, "homelab{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "not production infrastructure"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Docker service management"
+      );
+
+      await user.type(terminalInput, "contact{enter}");
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "rafael@marques.com"
+      );
+      expect(screen.getByTestId("latest-output")).toHaveTextContent(
+        "Escola Profissional de Trancoso"
+      );
+    });
+
+    it("lists only AirSense and the personal Unraid home lab as projects", async () => {
+      await user.type(terminalInput, "projects{enter}");
+      const output = screen.getByTestId("latest-output");
+
+      expect(output).toHaveTextContent("AirSense");
+      expect(output).toHaveTextContent("Personal Unraid home lab");
+      expect(output).not.toHaveTextContent("Omareddit");
+      expect(output).not.toHaveTextContent("Unraid Theme Studio");
+      expect(output).not.toHaveTextContent("Network Cable Leaderboard");
     });
   });
 });

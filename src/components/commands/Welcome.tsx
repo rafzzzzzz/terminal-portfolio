@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import { useLanguage } from "../../i18n";
+import { termContext } from "../Terminal";
 import {
   Cmd,
+  CommandButton,
+  CommandSuggestions,
   HeroContainer,
-  Link,
+  Identity,
   PreName,
   PreNameMobile,
   PreWrapper,
@@ -9,6 +14,18 @@ import {
 } from "../styles/Welcome.styled";
 
 const Welcome: React.FC = () => {
+  const { executeCommand } = useContext(termContext);
+  const { t } = useLanguage();
+  const suggestions = [
+    "about",
+    "skills",
+    "experience",
+    "homelab",
+    "projects",
+    "github",
+    "contact",
+  ];
+
   return (
     <HeroContainer data-testid="welcome">
       <div>
@@ -37,22 +54,25 @@ const Welcome: React.FC = () => {
             `}
           </PreNameMobile>
         </PreWrapper>
-        <div>
-          Computer engineering, computer networks, embedded systems, and
-          teaching.
-        </div>
+        <Identity>Rafael Marques</Identity>
+        <div>{t.welcome.headline}</div>
+        <div>{t.welcome.focus}</div>
+        <div>{t.welcome.location}</div>
         <Separator>----</Separator>
-        <div>
-          This project's source code is available in its{" "}
-          <Link href="https://github.com/rafzzzzzz/terminal-portfolio">
-            GitHub repository
-          </Link>
-          .
-        </div>
+        <div>{t.welcome.intro}</div>
         <Separator>----</Separator>
-        <div>
-          For a list of available commands, type `<Cmd>help</Cmd>`.
-        </div>
+        <div>{t.welcome.suggestions}</div>
+        <CommandSuggestions aria-label={t.welcome.suggestions}>
+          {suggestions.map(command => (
+            <CommandButton
+              key={command}
+              type="button"
+              onClick={() => executeCommand?.(command)}
+            >
+              <Cmd>{command}</Cmd>
+            </CommandButton>
+          ))}
+        </CommandSuggestions>
       </div>
     </HeroContainer>
   );

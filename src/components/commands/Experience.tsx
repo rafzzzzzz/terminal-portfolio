@@ -1,25 +1,30 @@
 import { EduIntro, EduList } from "../styles/Education.styled";
 import { Wrapper } from "../styles/Output.styled";
+import { useLanguage } from "../../i18n";
 
-const Experience: React.FC = () => (
-  <Wrapper data-testid="experience">
-    <EduIntro>Professional experience</EduIntro>
-    <EduList>
-      <div className="title">IT Teacher</div>
-      <div className="desc">
-        Escola Profissional de Trancoso | 2024 - present
-      </div>
-    </EduList>
-    <EduList>
-      <div className="title">Subjects and modules</div>
-      <div className="desc">
-        Computer networks, digital systems, computer architecture, data
-        communications, operating systems, devices and peripherals, network
-        protocols, transmission media, network installation and configuration,
-        and microprocessor architecture and programming.
-      </div>
-    </EduList>
-  </Wrapper>
-);
+const Experience: React.FC = () => {
+  const { t } = useLanguage();
+
+  return (
+    <Wrapper data-testid="experience">
+      <EduIntro>{t.experience.intro}</EduIntro>
+      <EduList>
+        <div className="title">{t.experience.role}</div>
+        <div className="desc">{t.experience.employer}</div>
+      </EduList>
+      <EduList>
+        <div className="title">{t.experience.teachingTitle}</div>
+        <div className="desc">{t.experience.teaching}</div>
+      </EduList>
+      <EduList>
+        <div className="title">{t.experience.practicalTitle}</div>
+        <div className="desc">{t.experience.practical}</div>
+      </EduList>
+      <EduList>
+        <div className="desc">{t.experience.boundary}</div>
+      </EduList>
+    </Wrapper>
+  );
+};
 
 export default Experience;

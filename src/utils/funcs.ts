@@ -142,12 +142,7 @@ export const argTab = (
 
   // 8) if input is 'projects go '
   else if (_.startsWith(inputVal, "projects go ")) {
-    [
-      "1.AirSense",
-      "2.Unraid Theme Studio",
-      "3.Omareddit",
-      "4.Network Cable Leaderboard",
-    ].forEach(t => {
+    ["1.AirSense", "2.Personal Unraid home lab"].forEach(t => {
       hintsCmds = [...hintsCmds, t];
     });
     return hintsCmds;

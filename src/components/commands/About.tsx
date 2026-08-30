@@ -3,25 +3,20 @@ import {
   HighlightAlt,
   HighlightSpan,
 } from "../styles/About.styled";
+import { useLanguage } from "../../i18n";
 
 const About: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <AboutWrapper data-testid="about">
       <p>
-        Hi, my name is <HighlightSpan>Rafael Marques</HighlightSpan>.
+        <HighlightSpan>{t.about[0]}</HighlightSpan>
       </p>
       <p>
-        I'm a{" "}
-        <HighlightAlt>
-          computer engineering graduate and IT teacher
-        </HighlightAlt>{" "}
-        based in Trancoso, Portugal.
+        <HighlightAlt>{t.about[1]}</HighlightAlt>
       </p>
-      <p>
-        I work across computer networks, operating systems, hardware, and
-        embedded systems, with a practical focus on Linux, self-hosting, and
-        IoT.
-      </p>
+      <p>{t.about[2]}</p>
     </AboutWrapper>
   );
 };

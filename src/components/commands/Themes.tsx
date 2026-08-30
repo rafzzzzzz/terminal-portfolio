@@ -11,11 +11,13 @@ import {
 import { termContext } from "../Terminal";
 import theme from "../styles/themes";
 import Usage from "../Usage";
+import { useLanguage } from "../../i18n";
 
 const myThemes = _.keys(theme);
 
 const Themes: React.FC = () => {
   const { arg, history, rerender } = useContext(termContext);
+  const { language } = useLanguage();
 
   const themeSwitcher = useContext(themeContext);
 
@@ -37,6 +39,7 @@ const Themes: React.FC = () => {
     checkArg()
   ) : (
     <Wrapper data-testid="themes">
+      <div>{language === "pt" ? "Temas disponíveis" : "Available themes"}</div>
       <ThemesWrapper>
         {myThemes.map(myTheme => (
           <ThemeSpan key={myTheme}>{myTheme}</ThemeSpan>

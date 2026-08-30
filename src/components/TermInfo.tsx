@@ -1,9 +1,13 @@
 import { User, WebsiteName, Wrapper } from "./styles/TerminalInfo.styled";
+import { useLanguage } from "../i18n";
 
 const TermInfo = () => {
+  const { language } = useLanguage();
+
   return (
     <Wrapper>
-      <User>visitor</User>@<WebsiteName>rafael-marques</WebsiteName>:~$
+      <User>{language === "pt" ? "visitante" : "visitor"}</User>@
+      <WebsiteName>rafael-marques</WebsiteName>:~$
     </Wrapper>
   );
 };

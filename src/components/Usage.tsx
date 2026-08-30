@@ -1,22 +1,24 @@
 import { UsageDiv } from "./styles/Output.styled";
+import { useLanguage } from "../i18n";
 
 type Props = {
   cmd: "themes" | "projects" | "socials";
   marginY?: boolean;
 };
 
-const arg = {
-  themes: { placeholder: "theme-name", example: "ubuntu" },
-  projects: { placeholder: "project-number", example: "4" },
-  socials: { placeholder: "link-number", example: "1" },
-};
-
 const Usage: React.FC<Props> = ({ cmd, marginY = false }) => {
+  const { language, t } = useLanguage();
+  const placeholders = {
+    themes: language === "pt" ? "nome-do-tema" : "theme-name",
+    projects: language === "pt" ? "número-do-projeto" : "project-number",
+    socials: language === "pt" ? "número-da-ligação" : "link-number",
+  };
+  const examples = { themes: "ubuntu", projects: "1", socials: "1" };
   const action = cmd === "themes" ? "set" : "go";
   return (
     <UsageDiv data-testid={`${cmd}-invalid-arg`} marginY={marginY}>
-      Usage: {cmd} {action} &#60;{arg[cmd].placeholder}&#62; <br />
-      Example: {cmd} {action} {arg[cmd].example}
+      {t.usage}: {cmd} {action} &#60;{placeholders[cmd]}&#62; <br />
+      {t.example}: {cmd} {action} {examples[cmd]}
     </UsageDiv>
   );
 };

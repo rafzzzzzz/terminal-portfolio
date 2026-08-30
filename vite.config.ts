@@ -7,6 +7,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/terminal-portfolio/",
   plugins: [
     react(),
     VitePWA({
@@ -14,18 +15,21 @@ export default defineConfig({
       manifest: {
         name: "Rafael Marques | Terminal Portfolio",
         "short_name": "Rafael Marques",
-        description: "The terminal portfolio of Rafael Marques.",
+        description:
+          "Bilingual terminal portfolio for Rafael Marques, an IT teacher transitioning into systems administration.",
         "theme_color": "#1d2a35",
         "background_color": "#1d2a35",
         display: "standalone",
         icons: [
           {
-            src: "/favicon.svg",
+            src: "favicon.svg",
             sizes: "any",
             type: "image/svg+xml",
             purpose: "any",
           },
         ],
+        "start_url": "./",
+        scope: "./",
       },
     }),
   ],

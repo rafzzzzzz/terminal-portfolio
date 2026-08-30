@@ -51,8 +51,11 @@ function App() {
 
   return (
     <>
-      <h1 className="sr-only" aria-label="Rafael Marques Terminal Portfolio">
-        Rafael Marques Terminal Portfolio
+      <h1
+        className="sr-only"
+        aria-label="Rafael Marques systems administration portfolio"
+      >
+        Rafael Marques systems administration portfolio
       </h1>
       {themeLoaded && (
         <ThemeProvider theme={selectedTheme}>

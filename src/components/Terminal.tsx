@@ -8,6 +8,7 @@ import React, {
 import _ from "lodash";
 import Output from "./Output";
 import TermInfo from "./TermInfo";
+import LanguageSwitch from "./LanguageSwitch";
 import {
   CmdNotFound,
   Empty,
@@ -19,30 +20,33 @@ import {
   Wrapper,
 } from "./styles/Terminal.styled";
 import { argTab } from "../utils/funcs";
+import { Language, languageContext, translations } from "../i18n";
 
 type Command = {
   cmd: string;
-  desc: string;
   tab: number;
 }[];
 
 export const commands: Command = [
-  { cmd: "about", desc: "learn about Rafael Marques", tab: 8 },
-  { cmd: "clear", desc: "clear the terminal", tab: 8 },
-  { cmd: "echo", desc: "print text to the terminal", tab: 9 },
-  { cmd: "education", desc: "view my educational background", tab: 4 },
-  { cmd: "email", desc: "send me an email", tab: 8 },
-  { cmd: "experience", desc: "view my professional experience", tab: 3 },
-  { cmd: "help", desc: "list available commands", tab: 9 },
-  { cmd: "history", desc: "view command history", tab: 6 },
-  { cmd: "projects", desc: "view projects I've built", tab: 5 },
-  { cmd: "publication", desc: "view my scientific publication", tab: 2 },
-  { cmd: "pwd", desc: "print current working directory", tab: 10 },
-  { cmd: "skills", desc: "view my technical skills", tab: 7 },
-  { cmd: "socials", desc: "view my social links", tab: 6 },
-  { cmd: "themes", desc: "list available themes", tab: 7 },
-  { cmd: "welcome", desc: "display the welcome section", tab: 6 },
-  { cmd: "whoami", desc: "display the current user", tab: 7 },
+  { cmd: "about", tab: 8 },
+  { cmd: "clear", tab: 8 },
+  { cmd: "contact", tab: 6 },
+  { cmd: "echo", tab: 9 },
+  { cmd: "education", tab: 4 },
+  { cmd: "email", tab: 8 },
+  { cmd: "experience", tab: 3 },
+  { cmd: "github", tab: 7 },
+  { cmd: "help", tab: 9 },
+  { cmd: "history", tab: 6 },
+  { cmd: "homelab", tab: 6 },
+  { cmd: "projects", tab: 5 },
+  { cmd: "publication", tab: 2 },
+  { cmd: "pwd", tab: 10 },
+  { cmd: "skills", tab: 7 },
+  { cmd: "socials", tab: 6 },
+  { cmd: "themes", tab: 7 },
+  { cmd: "welcome", tab: 6 },
+  { cmd: "whoami", tab: 7 },
 ];
 
 type Term = {
@@ -51,6 +55,7 @@ type Term = {
   rerender: boolean;
   index: number;
   clearHistory?: () => void;
+  executeCommand?: (command: string) => void;
 };
 
 export const termContext = createContext<Term>({
@@ -69,6 +74,19 @@ const Terminal = () => {
   const [rerender, setRerender] = useState(false);
   const [hints, setHints] = useState<string[]>([]);
   const [pointer, setPointer] = useState(-1);
+  const [language, setLanguageState] = useState<Language>(() =>
+    window.localStorage.getItem("portfolio-language") === "pt" ? "pt" : "en"
+  );
+  const t = translations[language];
+
+  const setLanguage = (nextLanguage: Language) => {
+    setLanguageState(nextLanguage);
+    window.localStorage.setItem("portfolio-language", nextLanguage);
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = language === "pt" ? "pt-PT" : "en";
+  }, [language]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,13 +96,17 @@ const Terminal = () => {
     [inputVal]
   );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setCmdHistory([inputVal, ...cmdHistory]);
+  const executeCommand = (command: string) => {
+    setCmdHistory(previous => [command, ...previous]);
     setInputVal("");
     setRerender(true);
     setHints([]);
     setPointer(-1);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    executeCommand(inputVal);
   };
 
   const clearHistory = () => {
@@ -182,67 +204,71 @@ const Terminal = () => {
   }, [inputRef, inputVal, pointer]);
 
   return (
-    <Wrapper data-testid="terminal-wrapper" ref={containerRef}>
-      {hints.length > 1 && (
-        <div>
-          {hints.map(hCmd => (
-            <Hints key={hCmd}>{hCmd}</Hints>
-          ))}
-        </div>
-      )}
-      <Form onSubmit={handleSubmit}>
-        <label htmlFor="terminal-input">
-          <TermInfo /> <MobileBr />
-          <MobileSpan>&#62;</MobileSpan>
-        </label>
-        <Input
-          title="Terminal command input"
-          type="text"
-          id="terminal-input"
-          autoComplete="off"
-          spellCheck="false"
-          autoFocus
-          autoCapitalize="off"
-          ref={inputRef}
-          value={inputVal}
-          onKeyDown={handleKeyDown}
-          onChange={handleChange}
-        />
-      </Form>
-
-      {cmdHistory.map((cmdH, index) => {
-        const commandArray = _.split(_.trim(cmdH), " ");
-        const validCommand = _.find(commands, { cmd: commandArray[0] });
-        const contextValue = {
-          arg: _.drop(commandArray),
-          history: cmdHistory,
-          rerender,
-          index,
-          clearHistory,
-        };
-        return (
-          <div key={_.uniqueId(`${cmdH}_`)}>
-            <div>
-              <TermInfo />
-              <MobileBr />
-              <MobileSpan>&#62;</MobileSpan>
-              <span data-testid="input-command">{cmdH}</span>
-            </div>
-            {validCommand ? (
-              <termContext.Provider value={contextValue}>
-                <Output index={index} cmd={commandArray[0]} />
-              </termContext.Provider>
-            ) : cmdH === "" ? (
-              <Empty />
-            ) : (
-              <CmdNotFound data-testid={`not-found-${index}`}>
-                command not found: {cmdH}
-              </CmdNotFound>
-            )}
+    <languageContext.Provider value={{ language, setLanguage, t }}>
+      <Wrapper data-testid="terminal-wrapper" ref={containerRef}>
+        {hints.length > 1 && (
+          <div>
+            {hints.map(hCmd => (
+              <Hints key={hCmd}>{hCmd}</Hints>
+            ))}
           </div>
-        );
-      })}
-    </Wrapper>
+        )}
+        <Form onSubmit={handleSubmit}>
+          <label htmlFor="terminal-input">
+            <TermInfo /> <MobileBr />
+            <MobileSpan>&#62;</MobileSpan>
+          </label>
+          <Input
+            title={t.inputTitle}
+            type="text"
+            id="terminal-input"
+            autoComplete="off"
+            spellCheck="false"
+            autoFocus
+            autoCapitalize="off"
+            ref={inputRef}
+            value={inputVal}
+            onKeyDown={handleKeyDown}
+            onChange={handleChange}
+          />
+        </Form>
+
+        {cmdHistory.map((cmdH, index) => {
+          const commandArray = _.split(_.trim(cmdH), " ");
+          const validCommand = _.find(commands, { cmd: commandArray[0] });
+          const contextValue = {
+            arg: _.drop(commandArray),
+            history: cmdHistory,
+            rerender,
+            index,
+            clearHistory,
+            executeCommand,
+          };
+          return (
+            <div key={_.uniqueId(`${cmdH}_`)}>
+              <div>
+                <TermInfo />
+                <MobileBr />
+                <MobileSpan>&#62;</MobileSpan>
+                <span data-testid="input-command">{cmdH}</span>
+              </div>
+              {validCommand ? (
+                <termContext.Provider value={contextValue}>
+                  <Output index={index} cmd={commandArray[0]} />
+                </termContext.Provider>
+              ) : cmdH === "" ? (
+                <Empty />
+              ) : (
+                <CmdNotFound data-testid={`not-found-${index}`}>
+                  {t.commandNotFound}: {cmdH}
+                </CmdNotFound>
+              )}
+            </div>
+          );
+        })}
+        <LanguageSwitch />
+      </Wrapper>
+    </languageContext.Provider>
   );
 };
 

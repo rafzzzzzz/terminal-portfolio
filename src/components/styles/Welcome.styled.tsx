@@ -33,6 +33,39 @@ export const Separator = styled.div`
   margin-bottom: 0.75rem;
 `;
 
+export const Identity = styled.div`
+  color: ${({ theme }) => theme.colors?.primary};
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+`;
+
+export const CommandSuggestions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.6rem 0 0.75rem;
+`;
+
+export const CommandButton = styled.button`
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors?.text[300]};
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.3rem 0.55rem;
+
+  &::before {
+    color: ${({ theme }) => theme.colors?.text[200]};
+    content: "$ ";
+  }
+
+  &:hover,
+  &:focus-visible {
+    border-color: ${({ theme }) => theme.colors?.secondary};
+    outline: none;
+  }
+`;
+
 export const Cmd = styled.span`
   color: ${({ theme }) => theme.colors?.primary};
 `;

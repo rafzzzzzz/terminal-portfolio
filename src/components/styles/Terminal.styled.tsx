@@ -51,3 +51,32 @@ export const Input = styled.input`
 export const Hints = styled.span`
   margin-right: 0.875rem;
 `;
+
+export const LanguageControls = styled.div`
+  align-items: center;
+  display: flex;
+  font-size: 0.875rem;
+  gap: 0.4rem;
+  justify-content: flex-end;
+  margin-bottom: 0.25rem;
+`;
+
+export const LanguageButton = styled.button`
+  background: transparent;
+  color: ${({ theme }) => theme.colors?.text[200]};
+  cursor: pointer;
+  font: inherit;
+  padding: 0.15rem 0.25rem;
+
+  &[aria-pressed="true"] {
+    color: ${({ theme }) => theme.colors?.primary};
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors?.secondary};
+    outline-offset: 2px;
+  }
+`;
