@@ -110,6 +110,16 @@ const theme: Themes = {
       scrollHandleHover: "#11111B",
       primary: "#CBA6F7",
       secondary: "#FAB387",
+      accents: {
+        heading: "#B4BEFE",
+        command: "#89B4FA",
+        link: "#89DCEB",
+        section: "#A6E3A1",
+        project: "#F5C2E7",
+        hint: "#94E2D5",
+        warning: "#F9E2AF",
+        error: "#F38BA8",
+      },
       text: {
         100: "#CDD6F4",
         200: "#BAC2DE",

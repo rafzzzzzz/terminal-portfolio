@@ -12,6 +12,8 @@ export const ProjectsIntro = styled.div`
 `;
 
 export const ProjectTitle = styled.div`
+  color: ${({ theme }) =>
+    theme.colors?.accents?.project ?? theme.colors?.text[100]};
   font-weight: 700;
   margin-bottom: 0.25rem;
 `;

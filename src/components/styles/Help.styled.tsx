@@ -10,7 +10,8 @@ export const CmdList = styled.div`
 `;
 
 export const Cmd = styled.span`
-  color: ${({ theme }) => theme.colors?.primary};
+  color: ${({ theme }) =>
+    theme.colors?.accents?.command ?? theme.colors?.primary};
 `;
 
 export const CmdDesc = styled.span`

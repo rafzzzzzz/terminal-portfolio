@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
 `;
 
 export const CmdNotFound = styled.div`
+  color: ${({ theme }) =>
+    theme.colors?.accents?.error ?? theme.colors?.text[100]};
   margin-top: 0.25rem;
   margin-bottom: 1rem;
 `;
@@ -49,6 +51,8 @@ export const Input = styled.input`
 `;
 
 export const Hints = styled.span`
+  color: ${({ theme }) =>
+    theme.colors?.accents?.hint ?? theme.colors?.text[100]};
   margin-right: 0.875rem;
 `;
 

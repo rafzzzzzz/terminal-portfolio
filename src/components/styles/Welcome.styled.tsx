@@ -34,7 +34,8 @@ export const Separator = styled.div`
 `;
 
 export const Identity = styled.div`
-  color: ${({ theme }) => theme.colors?.primary};
+  color: ${({ theme }) =>
+    theme.colors?.accents?.heading ?? theme.colors?.primary};
   font-weight: 700;
   margin-bottom: 0.25rem;
 `;
@@ -67,15 +68,18 @@ export const CommandButton = styled.button`
 `;
 
 export const Cmd = styled.span`
-  color: ${({ theme }) => theme.colors?.primary};
+  color: ${({ theme }) =>
+    theme.colors?.accents?.command ?? theme.colors?.primary};
 `;
 
 export const Link = styled.a`
-  color: ${({ theme }) => theme.colors?.secondary};
+  color: ${({ theme }) =>
+    theme.colors?.accents?.link ?? theme.colors?.secondary};
   text-decoration: none;
   line-height: 1.5rem;
   white-space: nowrap;
-  border-bottom: 2px dashed ${({ theme }) => theme.colors?.secondary};
+  border-bottom: 2px dashed
+    ${({ theme }) => theme.colors?.accents?.link ?? theme.colors?.secondary};
 
   &:hover {
     border-bottom-style: solid;
