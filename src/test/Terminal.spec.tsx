@@ -281,7 +281,7 @@ describe("Terminal Component", () => {
       expect(screen.getByTestId("welcome")).toHaveTextContent(
         "Linux | Redes | Docker | Self-hosting"
       );
-      expect(screen.getByTitle("Introdução de comandos no terminal")).toBe(
+      expect(screen.getByTitle("Entrada de comandos no terminal")).toBe(
         terminalInput
       );
 

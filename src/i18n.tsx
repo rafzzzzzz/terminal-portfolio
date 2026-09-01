@@ -129,7 +129,7 @@ export const translations = {
     languageLabel: "Language",
   },
   pt: {
-    inputTitle: "Introdução de comandos no terminal",
+    inputTitle: "Entrada de comandos no terminal",
     commandNotFound: "comando não encontrado",
     usage: "Utilização",
     example: "Exemplo",
@@ -140,10 +140,10 @@ export const translations = {
       location: "Trancoso, Guarda, Portugal",
       intro:
         "Escolhe um comando abaixo ou escreve help para ver todos os comandos.",
-      suggestions: "Começar por aqui",
+      suggestions: "Começa por aqui",
     },
     commandDescriptions: {
-      about: "conhecer Rafael Marques",
+      about: "saber mais sobre Rafael Marques",
       clear: "limpar o terminal",
       contact: "ver os contactos",
       echo: "mostrar texto no terminal",
@@ -156,7 +156,7 @@ export const translations = {
       homelab: "ver o meu laboratório doméstico",
       projects: "ver os meus projetos",
       publication: "ver a minha publicação científica",
-      pwd: "mostrar a diretoria de trabalho atual",
+      pwd: "mostrar o diretório de trabalho atual",
       skills: "ver as minhas competências técnicas",
       themes: "listar os temas disponíveis",
       welcome: "mostrar a apresentação inicial",
@@ -165,7 +165,7 @@ export const translations = {
     about: [
       "Olá, chamo-me Rafael Marques.",
       "Sou licenciado em Engenharia Informática e professor de Informática. Vivo em Trancoso, no distrito da Guarda.",
-      "Interesso-me pela administração de sistemas e procuro oportunidades onde possa aplicar e desenvolver a minha experiência com Linux, redes, Docker, self-hosting e hardware informático.",
+      "Interesso-me por administração de sistemas e procuro oportunidades em que possa aplicar e desenvolver as minhas competências em Linux, redes, Docker, self-hosting e hardware informático.",
     ],
     skills: {
       intro:
@@ -173,11 +173,11 @@ export const translations = {
       items: [
         [
           "Sistemas",
-          "Experiência com sistemas operativos Linux, Windows e macOS; Unraid utilizado no meu laboratório doméstico",
+          "Tenho experiência com os sistemas operativos Linux, Windows e macOS e utilizo Unraid no meu laboratório doméstico",
         ],
         [
           "Fluxos de trabalho assistidos por IA",
-          "Utilização prática de agent harnesses, skills reutilizáveis, gestão de contexto, iteração de prompts, revisão de código e validação através de testes",
+          "Experiência prática com agent harnesses, skills reutilizáveis, gestão de contexto, aperfeiçoamento de prompts, revisão de código e validação através de testes",
         ],
         [
           "Redes",
@@ -189,7 +189,7 @@ export const translations = {
         ],
         [
           "Hardware",
-          "Montagem, manutenção e diagnóstico de computadores e resolução de avarias em equipamentos",
+          "Montagem e manutenção de computadores, diagnóstico de avarias e resolução de problemas em equipamentos",
         ],
         [
           "Sistemas embebidos",
@@ -197,7 +197,7 @@ export const translations = {
         ],
         [
           "Programação e automação",
-          "C++, Java, PowerShell e shell scripting utilizados na formação e em projetos pessoais",
+          "Utilização de C++, Java, PowerShell e shell scripting na formação e em projetos pessoais",
         ],
       ],
     },
@@ -209,17 +209,17 @@ export const translations = {
       teaching:
         "Leciono redes de computadores, sistemas operativos, arquitetura de computadores, sistemas digitais, comunicação de dados, dispositivos e periféricos, protocolos de rede, meios de transmissão e programação de microprocessadores. Também faço a manutenção dos computadores do laboratório, instalo sistemas operativos, configuro switches e routers, resolvo problemas em equipamentos e preparo máquinas virtuais.",
       boundary:
-        "Esta é experiência de ensino e de laboratório escolar, não de administração de sistemas de produção.",
+        "Esta experiência foi adquirida no contexto do ensino e do laboratório escolar, e não na administração de sistemas de produção.",
     },
     homelab: {
       intro: "Laboratório doméstico pessoal com Unraid",
       summary:
-        "Um ambiente pessoal de self-hosting com Unraid, instalado em hardware comum de computador. É um laboratório doméstico, não uma infraestrutura de produção.",
+        "Mantenho um ambiente pessoal de self-hosting com Unraid em hardware convencional. É um laboratório doméstico e não uma infraestrutura de produção.",
       workTitle: "Trabalho habitual",
       work: "Gestão de serviços Docker, armazenamento, partilhas de rede, cópias de segurança, atualizações, resolução de problemas e manutenção regular.",
       servicesTitle: "Grupos de serviços",
       services:
-        "Gestão de conteúdos multimédia, transferências, administração e serviços de armazenamento e cópias de segurança.",
+        "Serviços de gestão de conteúdos multimédia, transferências, administração, armazenamento e cópias de segurança.",
     },
     projects: {
       intro:
@@ -227,7 +227,7 @@ export const translations = {
       airsense:
         "Um sistema económico de monitorização da qualidade do ar interior, baseado num ESP32, com sensores ambientais, placa de circuito impresso própria, caixa impressa em 3D, InfluxDB e Grafana.",
       homelab:
-        "O meu ambiente pessoal de self-hosting com Unraid em hardware comum de computador. Escreve homelab para ver a configuração e o trabalho habitual.",
+        "O meu ambiente pessoal de self-hosting com Unraid funciona em hardware convencional. Escreve homelab para ver a configuração e o trabalho habitual.",
     },
     contact: {
       intro: "Contactos",
@@ -236,7 +236,7 @@ export const translations = {
     },
     githubPrompt: "Clica na ligação abaixo para ver o meu perfil no GitHub.",
     emailPrompt:
-      "Clica no endereço abaixo para me enviar uma mensagem de correio eletrónico.",
+      "Clica no endereço de correio eletrónico abaixo para me enviares uma mensagem.",
     education: {
       intro: "Formação",
       degree: "Licenciatura em Engenharia Informática",
@@ -247,7 +247,7 @@ export const translations = {
     publication: {
       intro: "Publicação científica",
       description:
-        "Publicada pela Springer em New Trends in Disruptive Technologies, Tech Ethics, and Artificial Intelligence, DiTTEt 2024. O sistema baseado num ESP32 mede a qualidade do ar interior e guarda os dados no InfluxDB para apresentação no Grafana.",
+        "Publicada pela Springer em New Trends in Disruptive Technologies, Tech Ethics, and Artificial Intelligence, no âmbito da DiTTEt 2024. O sistema baseado num ESP32 mede a qualidade do ar interior e guarda os dados no InfluxDB para apresentação no Grafana.",
     },
     shortcuts: {
       autocomplete: "completar o comando",
