@@ -139,7 +139,7 @@ export const translations = {
       focus: "Linux | Redes | Docker | Self-hosting",
       location: "Trancoso, Guarda, Portugal",
       intro:
-        "Escolha um comando abaixo ou escreva help para ver todos os comandos.",
+        "Escolhe um comando abaixo ou escreve help para ver todos os comandos.",
       suggestions: "Começar por aqui",
     },
     commandDescriptions: {
@@ -227,16 +227,16 @@ export const translations = {
       airsense:
         "Um sistema económico de monitorização da qualidade do ar interior, baseado num ESP32, com sensores ambientais, placa de circuito impresso própria, caixa impressa em 3D, InfluxDB e Grafana.",
       homelab:
-        "O meu ambiente pessoal de self-hosting com Unraid em hardware comum de computador. Escreva homelab para ver a configuração e o trabalho habitual.",
+        "O meu ambiente pessoal de self-hosting com Unraid em hardware comum de computador. Escreve homelab para ver a configuração e o trabalho habitual.",
     },
     contact: {
       intro: "Contactos",
       location: "Localização",
       workplace: "Local de trabalho atual",
     },
-    githubPrompt: "Clique na ligação abaixo para ver o meu perfil no GitHub.",
+    githubPrompt: "Clica na ligação abaixo para ver o meu perfil no GitHub.",
     emailPrompt:
-      "Clique no endereço abaixo para me enviar uma mensagem de correio eletrónico.",
+      "Clica no endereço abaixo para me enviar uma mensagem de correio eletrónico.",
     education: {
       intro: "Formação",
       degree: "Licenciatura em Engenharia Informática",

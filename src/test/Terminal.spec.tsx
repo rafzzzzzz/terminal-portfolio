@@ -303,7 +303,7 @@ describe("Terminal Component", () => {
         "true"
       );
       expect(screen.getByTestId("welcome")).toHaveTextContent(
-        "Escolha um comando"
+        "Escolhe um comando"
       );
     });
 
