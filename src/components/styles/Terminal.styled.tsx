@@ -59,8 +59,7 @@ export const Input = styled.input`
   min-width: 0;
 
   &:focus-visible {
-    outline: 2px dashed ${({ theme }) => theme.colors?.secondary};
-    outline-offset: 2px;
+    outline: none;
   }
 
   @media (max-width: 550px) {
