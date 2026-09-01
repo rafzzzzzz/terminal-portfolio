@@ -1,9 +1,5 @@
-import { useContext, useEffect } from "react";
-import {
-  checkRedirect,
-  getCurrentCmdArry,
-  isArgInvalid,
-} from "../../utils/funcs";
+import { useContext } from "react";
+import { isArgInvalid } from "../../utils/funcs";
 import {
   ProjectContainer,
   ProjectDesc,
@@ -19,24 +15,14 @@ import Homelab from "./Homelab";
 const airsenseUrl = "https://github.com/rafzzzzzz/AirSense";
 
 const Projects: React.FC = () => {
-  const { arg, history, rerender } = useContext(termContext);
+  const { arg } = useContext(termContext);
   const { language, t } = useLanguage();
-
-  /* ===== get current command ===== */
-  const currentCommand = getCurrentCmdArry(history);
-
-  /* ===== check current command is redirect ===== */
-  useEffect(() => {
-    if (checkRedirect(rerender, currentCommand, "projects")) {
-      parseInt(arg[1]) === 1 && window.open(airsenseUrl, "_blank");
-    }
-  }, [arg, rerender, currentCommand]);
 
   /* ===== check arg is valid ===== */
   const checkArg = () =>
     isArgInvalid(arg, "go", ["1", "2"]) ? <Usage cmd="projects" /> : null;
 
-  if (arg.length > 0 || arg.length > 2) {
+  if (arg.length > 0) {
     if (checkArg()) return checkArg();
     if (arg[1] === "2") return <Homelab />;
     return (

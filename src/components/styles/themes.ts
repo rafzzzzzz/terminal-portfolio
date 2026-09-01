@@ -5,7 +5,8 @@ export type Themes = {
 };
 
 // Palettes mirror Omarchy colors.toml files. Catppuccin uses official Mocha
-// values and Omarchy's blue accent choice.
+// values and Omarchy's blue accent choice. A few text accents are lightened
+// where the source color does not meet WCAG AA contrast on its background.
 const theme: Themes = {
   catppuccin: {
     id: "T_001",
@@ -67,7 +68,7 @@ const theme: Themes = {
       scrollHandle: "#32473B",
       scrollHandleHover: "#53685B",
       primary: "#509475",
-      secondary: "#A2734B",
+      secondary: "#AF8259",
       accents: {
         heading: "#E5C736",
         command: "#ACD4CF",
@@ -173,14 +174,14 @@ const theme: Themes = {
       primary: "#81A1C1",
       secondary: "#D5967A",
       accents: {
-        heading: "#B48EAD",
+        heading: "#C0A3BB",
         command: "#81A1C1",
         link: "#88C0D0",
         section: "#A3BE8C",
-        project: "#B48EAD",
+        project: "#C0A3BB",
         hint: "#8FBCBB",
         warning: "#EBCB8B",
-        error: "#BF616A",
+        error: "#E1848B",
       },
       text: {
         100: "#D8DEE9",

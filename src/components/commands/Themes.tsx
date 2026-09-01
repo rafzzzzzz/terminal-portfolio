@@ -1,13 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import _ from "lodash";
 import { themeContext } from "../../App";
 import { Wrapper } from "../styles/Output.styled";
 import { ThemeSpan, ThemesWrapper } from "../styles/Themes.styled";
-import {
-  checkThemeSwitch,
-  getCurrentCmdArry,
-  isArgInvalid,
-} from "../../utils/funcs";
+import { isArgInvalid } from "../../utils/funcs";
 import { termContext } from "../Terminal";
 import theme from "../styles/themes";
 import Usage from "../Usage";
@@ -16,26 +12,31 @@ import { useLanguage } from "../../i18n";
 const myThemes = _.keys(theme);
 
 const Themes: React.FC = () => {
-  const { arg, history, rerender } = useContext(termContext);
+  const { arg, index } = useContext(termContext);
   const { language } = useLanguage();
-
   const themeSwitcher = useContext(themeContext);
+  const appliedTheme = useRef(false);
+  const action = arg[0];
+  const selectedTheme = arg[1];
 
-  /* ===== get current command ===== */
-  const currentCommand = getCurrentCmdArry(history);
-
-  /* ===== check current command makes redirect ===== */
   useEffect(() => {
-    if (checkThemeSwitch(rerender, currentCommand, myThemes)) {
-      themeSwitcher?.(theme[currentCommand[2]]);
+    if (
+      !appliedTheme.current &&
+      index === 0 &&
+      arg.length === 2 &&
+      action === "set" &&
+      _.includes(myThemes, selectedTheme)
+    ) {
+      appliedTheme.current = true;
+      themeSwitcher?.(theme[selectedTheme]);
     }
-  }, [arg, rerender, currentCommand]);
+  }, [action, arg.length, index, selectedTheme, themeSwitcher]);
 
   /* ===== check arg is valid ===== */
   const checkArg = () =>
     isArgInvalid(arg, "set", myThemes) ? <Usage cmd="themes" /> : null;
 
-  return arg.length > 0 || arg.length > 2 ? (
+  return arg.length > 0 ? (
     checkArg()
   ) : (
     <Wrapper data-testid="themes">

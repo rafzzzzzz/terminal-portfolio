@@ -7,10 +7,13 @@ export const HeroContainer = styled.div`
 `;
 
 export const PreName = styled.pre`
+  font-size: clamp(0.7rem, 1.7vw, 1rem);
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
 
-  @media (max-width: 550px) {
+  @media (max-width: 549px) {
     display: none;
   }
 `;
@@ -20,8 +23,11 @@ export const PreWrapper = styled.div`
 `;
 
 export const PreNameMobile = styled.pre`
+  font-size: clamp(0.65rem, 3.2vw, 1rem);
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+  max-width: 100%;
+  overflow: hidden;
 
   @media (min-width: 550px) {
     display: none;
@@ -49,7 +55,7 @@ export const CommandSuggestions = styled.div`
 
 export const CommandButton = styled.button`
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.colors?.text[300]};
+  border: 1px solid ${({ theme }) => theme.colors?.text[200]};
   color: inherit;
   cursor: pointer;
   font: inherit;
@@ -63,7 +69,11 @@ export const CommandButton = styled.button`
   &:hover,
   &:focus-visible {
     border-color: ${({ theme }) => theme.colors?.secondary};
-    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors?.secondary};
+    outline-offset: 2px;
   }
 `;
 
@@ -77,11 +87,17 @@ export const Link = styled.a`
     theme.colors?.accents?.link ?? theme.colors?.secondary};
   text-decoration: none;
   line-height: 1.5rem;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
   border-bottom: 2px dashed
     ${({ theme }) => theme.colors?.accents?.link ?? theme.colors?.secondary};
 
   &:hover {
     border-bottom-style: solid;
+  }
+
+  &:focus-visible {
+    border-bottom-style: solid;
+    outline: 2px solid ${({ theme }) => theme.colors?.secondary};
+    outline-offset: 2px;
   }
 `;

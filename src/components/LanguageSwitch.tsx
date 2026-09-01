@@ -5,7 +5,7 @@ const LanguageSwitch = () => {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <LanguageControls aria-label={t.languageLabel}>
+    <LanguageControls role="group" aria-label={t.languageLabel}>
       <span>{t.languageLabel}</span>
       <LanguageButton
         type="button"

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { render, screen, userEvent } from "../utils/test-utils";
+import { fireEvent, render, screen, userEvent } from "../utils/test-utils";
 import Terminal, { commands } from "../components/Terminal";
 
 // setup function
@@ -35,6 +35,19 @@ describe("Terminal Component", () => {
     it("should change input value", async () => {
       await user.type(terminalInput, "demo");
       expect(terminalInput.value).toBe("demo");
+    });
+
+    it("exposes the input and output with descriptive accessible names", () => {
+      expect(
+        screen.getByRole("textbox", { name: "Terminal command input" })
+      ).toBe(terminalInput);
+      expect(
+        screen.getByRole("log", { name: "Terminal history and output" })
+      ).toHaveTextContent("welcome");
+      expect(screen.getByRole("log")).toHaveAttribute(
+        "aria-relevant",
+        "additions"
+      );
     });
 
     it("should clear input value when click enter", async () => {
@@ -162,8 +175,30 @@ describe("Terminal Component", () => {
       await user.type(terminalInput, "projects go 1{enter}");
       expect(window.open).toHaveBeenCalledWith(
         "https://github.com/rafzzzzzz/AirSense",
-        "_blank"
+        "_blank",
+        "noopener,noreferrer"
       );
+    });
+
+    it.each(["1junk", "1.5", "01"])(
+      "should not open AirSense for malformed project ID '%s'",
+      async projectId => {
+        await user.type(terminalInput, `projects go ${projectId}{enter}`);
+
+        expect(window.open).not.toHaveBeenCalled();
+        expect(screen.getByTestId("projects-invalid-arg")).toBeInTheDocument();
+      }
+    );
+
+    it("should redirect only for the newly submitted project command", async () => {
+      await user.type(terminalInput, "projects go 1{enter}");
+      expect(window.open).toHaveBeenCalledTimes(1);
+
+      await user.type(terminalInput, "projects go 2{enter}");
+      expect(window.open).toHaveBeenCalledTimes(1);
+
+      await user.type(terminalInput, "projects go 1{enter}");
+      expect(window.open).toHaveBeenCalledTimes(2);
     });
 
     it("should show the GitHub profile link without opening it", async () => {
@@ -240,9 +275,41 @@ describe("Terminal Component", () => {
 
     it("should clear when 'Ctrl + L' is pressed", async () => {
       await user.type(terminalInput, "history{enter}");
-      await user.keyboard("{Control>}l{/Control}");
+      const allowedBrowserDefault = fireEvent.keyDown(terminalInput, {
+        key: "l",
+        ctrlKey: true,
+      });
+
+      expect(allowedBrowserDefault).toBe(false);
       expect(screen.queryAllByTestId("input-command")).toHaveLength(0);
     });
+
+    it("allows Tab and Shift+Tab to leave the input", async () => {
+      await user.tab();
+      expect(terminalInput).not.toHaveFocus();
+
+      terminalInput.focus();
+      await user.type(terminalInput, "invalid");
+      await user.tab({ shift: true });
+      expect(terminalInput).not.toHaveFocus();
+    });
+
+    it("allows Tab to leave after a command is fully completed", async () => {
+      await user.type(terminalInput, "about");
+      await user.tab();
+
+      expect(terminalInput).not.toHaveFocus();
+    });
+
+    it.each(["projects go 1", "themes set nord"])(
+      "allows Tab to leave after completing '%s'",
+      async command => {
+        await user.type(terminalInput, command);
+        await user.tab();
+
+        expect(terminalInput).not.toHaveFocus();
+      }
+    );
 
     it("should go to previous back and forth when 'Up & Down Arrow' is pressed", async () => {
       await user.type(terminalInput, "about{enter}");
@@ -276,8 +343,10 @@ describe("Terminal Component", () => {
     });
 
     it("switches all portfolio guidance to European Portuguese", async () => {
-      await user.click(screen.getByRole("button", { name: "PT" }));
+      const portugueseButton = screen.getByRole("button", { name: "PT" });
+      await user.click(portugueseButton);
 
+      expect(portugueseButton).toHaveFocus();
       expect(screen.getByTestId("welcome")).toHaveTextContent(
         "Linux | Redes | Docker | Self-hosting"
       );
@@ -310,10 +379,11 @@ describe("Terminal Component", () => {
     it("executes a clickable suggestion and adds it to history", async () => {
       await user.click(screen.getByRole("button", { name: "about" }));
 
+      expect(terminalInput).toHaveFocus();
       expect(screen.getByTestId("latest-output")).toHaveTextContent(
         "Rafael Marques"
       );
-      expect(screen.getAllByTestId("input-command")[0]).toHaveTextContent(
+      expect(screen.getAllByTestId("input-command").at(-1)).toHaveTextContent(
         "about"
       );
 

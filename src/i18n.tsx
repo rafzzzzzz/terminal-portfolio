@@ -5,6 +5,7 @@ export type Language = "en" | "pt";
 export const translations = {
   en: {
     inputTitle: "Terminal command input",
+    outputLabel: "Terminal history and output",
     commandNotFound: "command not found",
     usage: "Usage",
     example: "Example",
@@ -130,6 +131,7 @@ export const translations = {
   },
   pt: {
     inputTitle: "Entrada de comandos no terminal",
+    outputLabel: "Histórico e resultados do terminal",
     commandNotFound: "comando não encontrado",
     usage: "Utilização",
     example: "Exemplo",
@@ -143,17 +145,17 @@ export const translations = {
       suggestions: "Começa por aqui",
     },
     commandDescriptions: {
-      about: "saber mais sobre Rafael Marques",
+      about: "saber mais sobre mim",
       clear: "limpar o terminal",
       contact: "ver os contactos",
       echo: "mostrar texto no terminal",
       education: "ver a minha formação",
-      email: "mostrar o meu endereço de correio eletrónico",
+      email: "mostrar o meu endereço de e-mail",
       experience: "ver a minha experiência de ensino",
-      github: "mostrar a ligação para o meu perfil no GitHub",
+      github: "link para o meu perfil no GitHub",
       help: "listar os comandos disponíveis",
       history: "ver o histórico de comandos",
-      homelab: "ver o meu laboratório doméstico",
+      homelab: "ver o meu homelab",
       projects: "ver os meus projetos",
       publication: "ver a minha publicação científica",
       pwd: "mostrar o diretório de trabalho atual",
@@ -173,7 +175,7 @@ export const translations = {
       items: [
         [
           "Sistemas",
-          "Tenho experiência com os sistemas operativos Linux, Windows e macOS e utilizo Unraid no meu laboratório doméstico",
+          "Tenho experiência com os sistemas operativos Linux, Windows e macOS e utilizo Unraid no meu homelab",
         ],
         [
           "Fluxos de trabalho assistidos por IA",
@@ -185,7 +187,7 @@ export const translations = {
         ],
         [
           "Contentores e armazenamento",
-          "Gestão de serviços Docker, partilhas de rede, armazenamento e cópias de segurança no meu laboratório doméstico",
+          "Gestão de serviços Docker, partilhas de rede, armazenamento e cópias de segurança no meu homelab",
         ],
         [
           "Hardware",
@@ -234,9 +236,9 @@ export const translations = {
       location: "Localização",
       workplace: "Local de trabalho atual",
     },
-    githubPrompt: "Clica na ligação abaixo para ver o meu perfil no GitHub.",
+    githubPrompt: "Clica na ligação em baixo para ver o meu perfil no GitHub.",
     emailPrompt:
-      "Clica no endereço de correio eletrónico abaixo para me enviares uma mensagem.",
+      "Clica no endereço de e-mail em baixo para me enviares uma mensagem.",
     education: {
       intro: "Formação",
       degree: "Licenciatura em Engenharia Informática",

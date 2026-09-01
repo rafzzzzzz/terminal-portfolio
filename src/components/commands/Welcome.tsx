@@ -29,7 +29,7 @@ const Welcome: React.FC = () => {
   return (
     <HeroContainer data-testid="welcome">
       <div>
-        <PreName>
+        <PreName aria-hidden="true">
           {String.raw`
   ___       __          _   __  __
  | _ \__ _ / _|__ _ ___| | |  \/  |__ _ _ _ __ _ _  _ ___ ___
@@ -39,7 +39,7 @@ const Welcome: React.FC = () => {
           `}
         </PreName>
         <PreWrapper>
-          <PreNameMobile>
+          <PreNameMobile aria-hidden="true">
             {String.raw`
   ___       __          _
  | _ \__ _ / _|__ _ ___| |

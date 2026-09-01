@@ -3,6 +3,28 @@ import { beforeEach, describe, expect, it } from "vitest";
 import themes from "../components/styles/themes";
 import { useTheme } from "../hooks/useTheme";
 
+const relativeLuminance = (hex: string) => {
+  const hexChannels = hex.slice(1).match(/.{2}/g);
+  if (!hexChannels) throw new Error(`Invalid hex color: ${hex}`);
+
+  const channels = hexChannels
+    .map(channel => parseInt(channel, 16) / 255)
+    .map(channel =>
+      channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4
+    );
+
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+};
+
+const contrastRatio = (foreground: string, background: string) => {
+  const foregroundLuminance = relativeLuminance(foreground);
+  const backgroundLuminance = relativeLuminance(background);
+  const lighter = Math.max(foregroundLuminance, backgroundLuminance);
+  const darker = Math.min(foregroundLuminance, backgroundLuminance);
+
+  return (lighter + 0.05) / (darker + 0.05);
+};
+
 describe("portfolio themes", () => {
   beforeEach(() => window.localStorage.clear());
 
@@ -77,5 +99,24 @@ describe("portfolio themes", () => {
 
     expect(result.current.theme.name).toBe("catppuccin");
     expect(result.current.themeLoaded).toBe(true);
+  });
+
+  it("keeps every text color above the WCAG AA contrast threshold", () => {
+    Object.values(themes).forEach(theme => {
+      const textColors = [
+        theme.colors.primary,
+        theme.colors.secondary,
+        ...Object.values(theme.colors.accents),
+        theme.colors.text[100],
+        theme.colors.text[200],
+      ];
+
+      textColors.forEach(color => {
+        expect(
+          contrastRatio(color, theme.colors.body),
+          `${theme.name}: ${color} on ${theme.colors.body}`
+        ).toBeGreaterThanOrEqual(4.5);
+      });
+    });
   });
 });

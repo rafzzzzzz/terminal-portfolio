@@ -9,8 +9,8 @@ const History: React.FC = () => {
 
   return (
     <Wrapper data-testid="history">
-      {currentHistory.map(cmd => (
-        <div key={_.uniqueId(`${cmd}_`)}>{cmd}</div>
+      {currentHistory.map((cmd, index) => (
+        <div key={`${index}-${cmd}`}>{cmd}</div>
       ))}
     </Wrapper>
   );

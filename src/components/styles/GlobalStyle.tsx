@@ -43,11 +43,11 @@ const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors?.scrollHandle};
+    background: ${({ theme }) => theme.colors?.text[200]};
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.colors?.scrollHandleHover};
+    background: ${({ theme }) => theme.colors?.primary};
   }
 
   input[type=text] {
@@ -55,10 +55,6 @@ const GlobalStyle = createGlobalStyle<{ theme: DefaultTheme }>`
     color: ${({ theme }) => theme.colors?.text[100]};
     caret-color: ${({ theme }) => theme.colors?.primary};
   }
-  input[type=text]:focus-visible {
-    outline: none;
-  }
-
   .sr-only {
     position: absolute;
     left: -10000px;

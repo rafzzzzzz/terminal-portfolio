@@ -5,9 +5,14 @@ export const Wrapper = styled.div`
   padding-top: 0.75rem;
 
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
   overflow-y: auto;
+
+  @media (max-width: 550px) {
+    padding: 0.75rem 1rem 1rem;
+  }
 `;
 
 export const CmdNotFound = styled.div`
@@ -37,16 +42,29 @@ export const MobileBr = styled.br`
 `;
 
 export const Form = styled.form`
+  margin-bottom: 0.25rem;
+
   @media (min-width: 550px) {
     display: flex;
+
+    label {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
   }
 `;
 
 export const Input = styled.input`
   flex-grow: 1;
+  min-width: 0;
+
+  &:focus-visible {
+    outline: 2px dashed ${({ theme }) => theme.colors?.secondary};
+    outline-offset: 2px;
+  }
 
   @media (max-width: 550px) {
-    min-width: 85%;
+    width: calc(100% - 2.5rem);
   }
 `;
 
